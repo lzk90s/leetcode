@@ -1,5 +1,7 @@
 package com.leetcode;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,8 +13,9 @@ import java.util.List;
  * 链表组成的数字相加
  */
 public class AddTwoNumbers {
+
     public Node m(Node a, Node b) {
-        Node r = new Node(0);
+        Node r = new Node(0, null);
         Node ta = a, tb = b;
         int carry = 0;
         Node tmp = r;
@@ -22,61 +25,33 @@ public class AddTwoNumbers {
             int y = (null == tb) ? 0 : tb.val;
             int z = x + y + carry;
             carry = z / 10;
-            tmp.next = new Node(z % 10);
+            tmp.next = new Node(z % 10, null);
             tmp = tmp.next;
             ta = ta == null ? null : ta.next;
             tb = tb == null ? null : tb.next;
         }
 
         if (carry > 0) {
-            tmp.next = new Node(carry);
+            tmp.next = new Node(carry, null);
         }
         return r.next;
     }
 
     @Test
     public void test() {
-        Node a = new Node(-1);
-        Node b = new Node(-1);
-        int[] a1 = {2, 4, 3};
-        int[] b1 = {5, 6, 4};
+        Node a = new Node(2, new Node(3, new Node(4, null)));
+        Node b = new Node(5, new Node(8, new Node(4, null)));
 
-        Node t = a;
-        for (var i : a1) {
-            t.setNext(new Node(i));
-            t = t.getNext();
-        }
-        t = b;
-        for (var i : b1) {
-            t.setNext(new Node(i));
-            t = t.getNext();
-        }
-
-        var r = m(a.next, b.next);
-        var r1 = Arrays.asList(7,0,8);
+        var r = m(a, b);
+        var r1 = Arrays.asList(7,1,9);
         Assert.assertEquals(r1, r.toList());
     }
 
+    @Data
+    @AllArgsConstructor
     public static class Node {
         int val;
         Node next;
-
-        public Node(int v) {
-            this.val = v;
-            this.next = null;
-        }
-
-        public int getVal(){
-            return this.val;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
 
         List<Integer> toList() {
             List<Integer> list = new ArrayList<>();

@@ -1,5 +1,7 @@
 package com.leetcode;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ import java.util.List;
 public class ReverseList {
 
     Node reverseListByInsert(Node node) {
-        Node result = new Node(-1);
+        Node result = new Node(-1, null);
         while (node != null) {
             Node tmpNode = node.next;
             node.next = result.next;
@@ -38,10 +40,7 @@ public class ReverseList {
 
     @Test
     public void test() {
-        Node node = new Node(0);
-        node.setNext(new Node(1));
-        node.getNext().setNext(new Node(2));
-        node.getNext().getNext().setNext(new Node(3));
+        Node node = new Node(0, new Node(1, new Node(2, new Node(3, null))));
 
         var r = reverseListByInsert(node);
         List<Integer> r1 = Arrays.asList(3, 2, 1, 0);
@@ -50,10 +49,7 @@ public class ReverseList {
 
     @Test
     public void test1(){
-        Node node = new Node(0);
-        node.setNext(new Node(1));
-        node.getNext().setNext(new Node(2));
-        node.getNext().getNext().setNext(new Node(3));
+        Node node = new Node(0, new Node(1, new Node(2, new Node(3, null))));
 
         var r = reverseListByLocal(node);
         List<Integer> r1 = Arrays.asList(3, 2, 1, 0);
@@ -61,30 +57,11 @@ public class ReverseList {
     }
 
 
+    @Data
+    @AllArgsConstructor
     public class Node {
         int val;
         Node next;
-
-        public Node(int val) {
-            this.val = val;
-            this.next = null;
-        }
-
-        int getVal() {
-            return this.val;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
 
         List<Integer> toList() {
             List<Integer> list = new ArrayList<>();
