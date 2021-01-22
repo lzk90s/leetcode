@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import java.util.PriorityQueue;
 
+/**
+ * 最小的k个数
+ * 大堆顶
+ */
 public class LeastNumbers {
     public int[] m(int[] nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<>(k, (o1, o2) -> o2 - o1);

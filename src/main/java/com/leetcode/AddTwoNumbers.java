@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 链表组成的数字相加
+ */
 public class AddTwoNumbers {
     public Node m(Node a, Node b) {
         Node r = new Node(0);
